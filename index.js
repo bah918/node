@@ -23,43 +23,18 @@ app.listen(8000, () => {
 })
 //Exercice 2 
 
-/*app.get("/auteurs/:id/books",(require,response)=>{
-    if(require.params.id=="1"){
-        response.send("Beowulf")
-    }else if(require.params.id=="2"){
-        response.send("Hamlet, Othello, Romeo and Juliet, MacBeth")
-    }else if(require.params.id=="3/"){
-        response.send("Oliver Twist, A Christmas Caro")
-    }else if(require.params.id=="4"){
-        response.send("The Picture of Dorian Gray, The Importance of Being")
-    }else {
-        app.get("*", (request, response) => {
-            response.send("route non existente");
-        }
-        )}
-})*/
 //autres solution pour l'exo2
 app.get("/auteurs/:id/books",(require,response)=>{
-    const tab=[
-        1:"Beowulf",
-        2:"Hamlet, Othello, Romeo and Juliet, MacBeth",
-        3:"Oliver Twist, A Christmas Caro",
-        4:"The Picture of Dorian Gray, The Importance of Being"
+    const tab=[{id:1, books: "Beowulf", authors:"Lawrence Nowell, UK"},
+        {id:2,books:"Hamlet, Othello, Romeo and Juliet, MacBeth", authors:"William Shakespeare, UK"},
+        {id:3,books:"Oliver Twist, A Christmas Caro",auteurs:"Charles Dickens, US"},
+       {id:4,books:"The Picture of Dorian Gray, The Importance of Being",auteurs:"Oscar Wilde, UK"}
     ];
-   
-    for(let i =0; i<tab.length; i++){
-        if(require.params.id==tab[i]){
-            response.send(tab[i]);
-        }
-        app.get("*", (request, response) => {
-            response.send("route non existente");
-        });
-    }
-}
-
-
-
-
+    tab.filter((elem)=>{
+        if(elem.id==require.params.id){
+           return (response.send(elem.books));
+        }});
+    })
 
 
 
